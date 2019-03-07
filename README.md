@@ -43,16 +43,16 @@ enum BlockType
 ### Run the project to check functionality. 
 
 ### Run the project enter file name to format/validate the code.
-<img src="./screens/1.png"/>
+<img src="./screens/1.png" width="300"/>
 
 ### Extra brace found.
-<img src="./screens/2.png"/>
+<img src="./screens/2.png" width="300"/>
 
 ### Extra brace found.
-<img src="./screens/3.png"/>
+<img src="./screens/3.png" width="300"/>
 
 ### Extra closing parenthises found.
-<img src="./screens/4.png"/>
+<img src="./screens/4.png" width="300"/>
 
 ## Author
 [Waheed Nazir](https://www.linkedin.com/in/waheed-nazir-36521579/ "Waheed Nazir (WaveTechStudio)")
