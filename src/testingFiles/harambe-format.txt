@@ -1,0 +1,291 @@
+import java.util.Scanner;
+
+/**
+ * @author Amna Munawar
+ *
+ */
+public class TripPlanner {
+
+	private static Scanner input = new Scanner(System.in);
+	private static Itinerary firstItinerary = new Itinerary();
+	private static Itinerary secondItinerary = new Itinerary();
+	private static String currentItin = "first";
+
+	/**
+	 * Driver class, Execution starts from main method
+	 * 
+	 * @param args
+	 *            Array strings
+	 * @throws EndOfListException
+	 * @throws EndOfItineraryException
+	 * @throws IllegalArgumentException
+	 */
+	public static void main(String[] args)
+			throws EndOfListException, EndOfItineraryException, IllegalArgumentException {
+		char choice = '\0';
+		boolean exit = false;
+
+		System.out.print("Welcome to TripPlanner!\n");
+		do {
+			System.out.print("\n" 
+		            + "F. Cursor forward" + "\n" 
+					+ "B. Cursor backward" + "\n" 
+		            + "I. Insert before cursor"+ "\n" 
+					+ "A. Append to tail" + "\n" 
+		            + "D. Delete and move cursor forward" + "\n"
+					+ "H. Cursor to Head" + "\n" 
+		            + "T. Cursor to Tail" + "\n" 
+					+ "E. Edit cursor" + "\n"
+					+ "S. Switch itinerary" + "\n"
+					+ "O. Insert cursor from other itinerary after cursor from this itinerary" + "\n"
+					+ "R. Replace this itinerary with a copy of the other itinerary" + "\n"
+					+ "P. Print current itinerary, including summary" + "\n" 
+					+ "C. Clear current itinerary" + "\n"
+					+ "Q. Quit" + "\n\n");
+			System.out.print("Enter your choice : ");
+
+			try {
+				choice = input.nextLine().charAt(0);
+			} catch (Exception e) {
+				choice = 'x';
+			}
+			switch (Character.toUpperCase(choice)) {
+			case 'F': getCurrentItinerary().cursorForward(); 
+			   break;
+			case 'B': getCurrentItinerary().cursorBackward(); 
+			    break;
+			case 'I': insertBeforeCursor();
+				break;
+			case 'A': appendToTail();
+				break;
+			case 'D': getCurrentItinerary().removeCursor();
+				break;
+			case 'H': getCurrentItinerary().resetCursorToHead();
+				break;
+			case 'T': getCurrentItinerary().resetCursorToTail();
+				break;
+			case 'E': editCursor();
+				break;
+			case 'S': switchItinerary();
+				break;
+			case 'O': insertAfterCursor();
+				break;
+			case 'R': copyOtherItineraryCurrentItinerary();
+				break;
+			case 'P': printCurrentItineraryWithSummary();
+				break;
+			case 'C': clearCurrentItinerary();
+				break;
+			case 'Q':
+				exit = true;
+				System.out.println("Program Terminated Normally...");
+				break;
+			default:
+				System.out.println("Incorrect Input");
+			}
+		} while (!exit);
+	}
+
+	/**
+	 * I. Insert before cursor
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	private static void insertBeforeCursor() throws IllegalArgumentException {
+		String location = "";
+		String activity = "";
+		int distance = 0;
+
+		System.out.print("Enter location : ");
+		try {
+			location = input.nextLine();
+		} catch (Exception e) {
+		}
+		System.out.print("Enter activity : ");
+		activity = input.nextLine();
+
+		do {
+			System.out.print("Enter distance : ");
+			try {
+				distance = input.nextInt();
+				input.nextLine();
+			} catch (Exception e) {
+				distance = -1;
+			}
+		} while (distance < 0);
+
+		TripStop tripStop = new TripStop(location, activity, distance);
+		getCurrentItinerary().insertBeforeCursor(tripStop);
+	}
+
+	/**
+	 * O. Insert after cursor
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	private static void insertAfterCursor() throws IllegalArgumentException {
+		if (currentItin.equalsIgnoreCase("first")) {
+			firstItinerary.insertAfterCursor(secondItinerary.getCursorStop());
+		} else {
+			secondItinerary.insertAfterCursor(firstItinerary.getCursorStop());
+		}
+	}
+
+	/**
+	 * A. Append to tail
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	private static void appendToTail() throws IllegalArgumentException {
+		String location = "";
+		String activity = "";
+		int distance = 0;
+
+		System.out.print("Enter location : ");
+		try {
+			location = input.nextLine();
+		} catch (Exception e) {
+		}
+
+		System.out.print("Enter activity : ");
+		activity = input.nextLine();
+
+		do {
+			System.out.print("Enter distance : ");
+			try {
+				distance = input.nextInt();
+				input.nextLine();
+			} catch (Exception e) {
+				distance = -1;
+			}
+		} while (distance < 0);
+
+		TripStop tripStop = new TripStop(location, activity, distance);
+		getCurrentItinerary().appendToTail(tripStop);
+	}
+
+	/**
+	 * E. Edit cursor
+	 */
+	private static void editCursor() {
+		TripStop tripStop = getCurrentItinerary().getCursorStop();
+		if (tripStop == null) {
+			System.out.print("\nThis trip has no stops.\n");
+			return;
+		}
+		String location = "";
+		String activity = "";
+		int distance = 0;
+
+		System.out.print("Enter location, press enter without typing anything to keep old value: ");
+		try {
+			location = input.nextLine();
+		} catch (Exception e) {
+		}
+
+		System.out.print("Enter activity, or press enter without typing anything to keep old value: ");
+		activity = input.nextLine();
+
+		do {
+			System.out.print("Enter distance, or press -1 to keep old value:  ");
+			try {
+				distance = input.nextInt();
+				input.nextLine();
+			} catch (Exception e) {
+				distance = -1;
+			}
+		} while (distance < -1);
+		if (!activity.isEmpty()) {
+			tripStop.setActivity(activity);
+		}
+		if (!location.isEmpty()) {
+			tripStop.setLocation(location);
+		}
+		if (distance > 0) {
+			tripStop.setDistance(distance);
+		}
+	}
+
+	/**
+	 * S. Switch itinerary
+	 */
+	private static void switchItinerary() {
+		if (currentItin.equalsIgnoreCase("first")) {
+			currentItin = "second";
+		} else {
+			currentItin = "first";
+		}
+		System.out.println("\n Current itinerary switched ! \n");
+	}
+
+	/**
+	 * P. Print current itinerary, including summary
+	 */
+	private static void printCurrentItineraryWithSummary() {
+		System.out.println(getCurrentItinerary().toString());
+	}
+
+	/**
+	 * C. Clear current itinerary
+	 */
+	private static void clearCurrentItinerary() {
+		if (currentItin.equalsIgnoreCase("first")) {
+			firstItinerary = new Itinerary();
+		} else {
+			secondItinerary = new Itinerary();
+		}
+		System.out.println("\n Current itinerary cleared ! \n");
+	}
+
+	/**
+	 * @return Returns current Itinerary
+	 */
+	private static Itinerary getCurrentItinerary() {
+		if (currentItin.equalsIgnoreCase("first")) {
+			return firstItinerary;
+		} else {
+			return secondItinerary;
+		}
+	}
+
+	/**
+	 * Update current itinerary with the copy of other Itinerary
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	private static void copyOtherItineraryCurrentItinerary() throws IllegalArgumentException {
+		// Replace this itinerary with a copy of the other itinerary
+		if (currentItin.equalsIgnoreCase("first")) {
+			firstItinerary = copier(firstItinerary, secondItinerary);
+		} else {
+			secondItinerary = copier(secondItinerary, firstItinerary);
+		}
+	}
+
+	/**
+	 * @param destinationItin
+	 *            Current itinerary to be updated with other itinerary
+	 * @param sourceItin
+	 *            Other itinerary that is being copied to current itinerary
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	private static Itinerary copier(Itinerary destinationItin, Itinerary sourceItin) throws IllegalArgumentException {
+		destinationItin = new Itinerary();
+		TripStopNode currentDestinationNode = new TripStopNode(null);
+		TripStopNode current = sourceItin.getHead();
+		while ((current != null) && current.getData() != null) {
+			TripStopNode temp = new TripStopNode(null);
+			temp.setData(current.getData());
+			if (current == sourceItin.getCursor()) {
+				// It is a cursor value
+				destinationItin.setCursor(temp);
+			}
+			currentDestinationNode = temp;
+			destinationItin.appendToTail(currentDestinationNode.getData());
+			current = current.getNext();
+		}
+		return destinationItin;
+	}
+
+}
