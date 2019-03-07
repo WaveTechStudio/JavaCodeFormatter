@@ -10,20 +10,25 @@ Eclipse, Intelli-J Idea
 - Check code validations, Braces missing parenthises 
 
 ### Run the project to check functionality. 
+
 <br/>
-## Run the project enter file name to format/validate the code.
+
+### Run the project enter file name to format/validate the code.
 <img src="./screens/1.png"/>
 
 <br/>
-## Extra brace found.
+
+### Extra brace found.
 <img src="./screens/2.png"/>
 
 <br/>
-## Extra brace found.
+
+### Extra brace found.
 <img src="./screens/3.png"/>
 
 <br/>
-## Extra closing parenthises found.
+
+### Extra closing parenthises found.
 <img src="./screens/4.png"/>
 <br/>
 
