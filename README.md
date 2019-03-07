@@ -2,7 +2,7 @@
 Code Formatter, Indent, Parenthesis checker, Code formatting.  
 
 ## Prerequisites
-Eclipse, Intelli-J Idea
+Eclipse or IntelliJ IDEA
 
 ## Features
 - Indent code
@@ -35,9 +35,9 @@ Your stack must have these public methods:
 - public boolean isEmpty() - returns true if stack is empty, false otherwise.
 The details for these methods are standard stack methods. You can find those details in the lecture slides.
 - enum BlockType
- i) BRACE
- ii) PAREN
- iii) FOR
+BRACE
+PAREN
+FOR
 
 ### Run the project to check functionality. 
 
