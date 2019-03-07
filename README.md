@@ -12,19 +12,19 @@ Eclipse, Intelli-J Idea
 ### Screens
 
 Run the project enter file name to format/validate the code.
-<img src="./screens/11.png"/>
+<img src="./screens/11.png" width="300"/>
 
 <br/>
 Extra brace found.
-<img src="./screens/2.png"/>
+<img src="./screens/2.png" width="300"/>
 
 <br/>
 Extra brace found.
-<img src="./screens/3.png"/>
+<img src="./screens/3.png" width="300"/>
 
 <br/>
 Extra closing parenthises found.
-<img src="./screens/4.png"/>
+<img src="./screens/4.png" width="300"/>
 <br/>
 
 ## Author
