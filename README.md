@@ -11,10 +11,8 @@ Eclipse, Intelli-J Idea
 
 ### Implementation
 
-<br/>
-
 ### JavascriptFormatterRunner (driver)
-<br/>
+
 •	public static void main(String args)
 •	Displays menu asking for name of input file
 •	Rest of program flow follows the following use case:
@@ -23,10 +21,8 @@ Eclipse, Intelli-J Idea
 3.	Program prints (to Standard Out) the formatted JavaScript from input and any errors. These errors also print to the console.
 4.	Program Exits.
 
-<br/>
-
 ### JavaFormatter
-<br/>
+
 •	private JSStack stack - This is the stack where you will push and pop parentheses and braces.
 •	private int indentLevel - This is where you store the number of tab ('\t') characters to print before a line
 •	public String format(String input) - this method takes the data from the file and formats it.
@@ -44,29 +40,19 @@ enum BlockType
 •	PAREN
 •	FOR
 
-
 ### Run the project to check functionality. 
-
-<br/>
 
 ### Run the project enter file name to format/validate the code.
 <img src="./screens/1.png"/>
 
-<br/>
-
 ### Extra brace found.
 <img src="./screens/2.png"/>
-
-<br/>
 
 ### Extra brace found.
 <img src="./screens/3.png"/>
 
-<br/>
-
 ### Extra closing parenthises found.
 <img src="./screens/4.png"/>
-<br/>
 
 ## Author
 [Waheed Nazir](https://www.linkedin.com/in/waheed-nazir-36521579/ "Waheed Nazir (WaveTechStudio)")
