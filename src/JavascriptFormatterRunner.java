@@ -22,7 +22,7 @@ public class JavascriptFormatterRunner {
     private static String output = "";
 
 
-    private static String folderpath = "../JavaScriptFormatter/src/testingFiles/";
+    private static String folderpath = "../01)JavaCodeFormatter/src/testingFiles/";
 
     /**
      * Driver class, Execution starts from main method
