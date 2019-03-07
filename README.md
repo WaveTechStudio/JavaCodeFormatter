@@ -11,7 +11,10 @@ Eclipse, Intelli-J Idea
 
 ### Implementation
 
-01) JavascriptFormatterRunner (driver)
+<br/>
+
+### JavascriptFormatterRunner (driver)
+<br/>
 •	public static void main(String args)
 •	Displays menu asking for name of input file
 •	Rest of program flow follows the following use case:
@@ -22,7 +25,8 @@ Eclipse, Intelli-J Idea
 
 <br/>
 
-01) JavaFormatter
+### JavaFormatter
+<br/>
 •	private JSStack stack - This is the stack where you will push and pop parentheses and braces.
 •	private int indentLevel - This is where you store the number of tab ('\t') characters to print before a line
 •	public String format(String input) - this method takes the data from the file and formats it.
